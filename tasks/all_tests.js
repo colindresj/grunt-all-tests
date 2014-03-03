@@ -3,7 +3,6 @@
  *
  *
  * Copyright (c) 2014 Jorge Colindres
- * Licensed under the MIT license.
  */
 
 'use strict';

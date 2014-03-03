@@ -105,6 +105,3 @@ grunt.initConfig({
 
 ## Release History
 * 2014-03-03   v0.1.0   Initial release.
-
-## License
-Copyright (c) 2014 Jorge Colindres. Licensed under the MIT license.
