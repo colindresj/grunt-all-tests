@@ -27,14 +27,13 @@
         var expect = chai.expect;
     </script>
 
-    <!-- Include any fixtures -->
-    {{ fixtures }}
+    <!--(*begin_test_files)-->
+      <script src="fix3.test.js"></script>
+    <!--(*end_test_files)-->
 
-    <!-- Include anything you want to test, can be more than one -->
-    {{ test_files }}
-
-    <!-- Spec files -->
-    {{ spec_files }}
+    <!--(*begin_spec_files)-->
+      <script src="fix3.specfile.js"></script>
+    <!--(*end_spec_files)-->
 
     <!-- run mocha -->
     <script type="text/javascript" charset="utf-8">

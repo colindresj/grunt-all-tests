@@ -40,17 +40,20 @@ module.exports = function(grunt) {
 
     // Iterate over all specified file groups.
     this.files.forEach(function(file) {
-      var testFiles, specFiles, fin;
+      var fixtureContent, testContent, specContent, fin;
 
-      testFiles = parseContent( file, new RegExp('<!--[(][*]begin_test_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_test_files[)](-->)', 'g') );
+      fixtureContent = parseContent( file, new RegExp('<!--[(][*]begin_fixtures[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_fixtures[)](-->)', 'g') );
 
-      specFiles = parseContent( file, new RegExp('<!--[(][*]begin_spec_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_spec_files[)](-->)', 'g') );
+      testContent = parseContent( file, new RegExp('<!--[(][*]begin_test_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_test_files[)](-->)', 'g') );
+
+      specContent = parseContent( file, new RegExp('<!--[(][*]begin_spec_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_spec_files[)](-->)', 'g') );
 
       // Replace the template content with the parsed content
       // and return the finished product.
       fin = grunt.file.read(options.template)
-                              .replace(/{{( test_files )}}/g, testFiles)
-                              .replace(/{{( spec_files )}}/g, specFiles);
+                              .replace(/{{( fixtures )}}/g, fixtureContent)
+                              .replace(/{{( test_files )}}/g, testContent)
+                              .replace(/{{( spec_files )}}/g, specContent);
 
 
       // Delete any previously existing destination file.

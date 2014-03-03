@@ -38,7 +38,7 @@ module.exports = function (grunt) {
           template: 'test/fixtures/template.html'
         },
         files: {
-          'tmp/universal.html': ['test/fixtures/fixture.html', 'test/fixtures/fixture2.html']
+          'tmp/universal.html': ['test/fixtures/fixture*.html']
         }
       }
     },
