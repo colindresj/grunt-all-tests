@@ -39,7 +39,7 @@ module.exports = function (grunt) {
         },
         files: [
           {
-            src: ['test/fixtures/fixture*.html', 'hero.html'],
+            src: ['test/fixtures/fixture*.html'],
             dest: 'tmp/universal.html',
             nonull: true
           }

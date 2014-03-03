@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       return file.src.map(function(filepath) {
         var html;
 
-        // Warn on and remove invalid source files (if nonull was set).
+        // Warn on and return error comment (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
           return '<!--*** File ' + filepath + ' missing ***-->';
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
           }
         }
       })
-      .join( grunt.util.normalizelf( options.separator) );
+      .join( grunt.util.normalizelf(options.separator) );
     }
 
     // Iterate over all specified file groups.
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
       // Replace the template content with the parsed content
       // and return the finished product.
       fin = grunt.file.read(options.template)
-                              .replace( /{{( fixtures )}}/g, fixtureContent)
+                              .replace(/{{( fixtures )}}/g, fixtureContent)
                               .replace(/{{( test_files )}}/g, testContent)
                               .replace(/{{( spec_files )}}/g, specContent);
 

@@ -23,11 +23,11 @@ var grunt = require('grunt');
 */
 
 exports.universal_tests = {
-  setUp: function(done) {
+  setUp: function(done){
     // setup here if necessary
     done();
   },
-  write: function(test) {
+  write: function(test){
     test.expect(1);
 
     var actual = grunt.file.read('tmp/universal.html');
