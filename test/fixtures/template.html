@@ -28,13 +28,10 @@
     </script>
 
     <!-- Include anything you want to test, can be more than one -->
-    <!-- ***test_files*** -->
-    <script src="../js/vendors/Rea.js/rea.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/common/tny.rea.js" type="text/javascript" charset="utf-8"></script>
-    <!-- ***test_files*** -->
+    {{ test_files }}
 
     <!-- Spec files -->
-    {{ SPEC_FILES }}
+    {{ spec_files }}
 
     <!-- run mocha -->
     <script type="text/javascript" charset="utf-8">

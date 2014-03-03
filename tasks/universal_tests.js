@@ -8,12 +8,9 @@
 
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
-  grunt.registerMultiTask('universal_tests', 'Combine your tests into one.', function () {
+  grunt.registerMultiTask('universal_tests', 'Combine your tests into one.', function() {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
@@ -21,12 +18,10 @@ module.exports = function (grunt) {
       separator: '\n'
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(file) {
-
-      // Returned the parsed contents for each file,
-      // and join the parsed contents.
-      var specFiles = file.src.map(function(filepath) {
+    // Return the parsed content joined together as
+    // a single string of HTML.
+    function parseContent(file, regex){
+      return file.src.map(function(filepath) {
         var html;
 
         // Warn on and remove invalid source files (if nonull was set).
@@ -36,19 +31,39 @@ module.exports = function (grunt) {
         } else {
           html = grunt.file.read(filepath);
           if (html) {
-            return html.match( new RegExp('<!--[(][*]begin_spec_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_spec_files[)](-->)', 'g') );
+            return html.match(regex);
           }
         }
       })
-      .join( grunt.util.normalizelf(options.separator) );
+      .join( grunt.util.normalizelf( options.separator) );
+    }
 
-      var fin = grunt.file.read(options.template).replace(/{{( SPEC_FILES )}}/g, specFiles);
+    // Iterate over all specified file groups.
+    this.files.forEach(function(file) {
+      var testFiles, specFiles, fin;
 
-      // Write all the parsed content to destination.
+      testFiles = parseContent( file, new RegExp('<!--[(][*]begin_test_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_test_files[)](-->)', 'g') );
+
+      specFiles = parseContent( file, new RegExp('<!--[(][*]begin_spec_files[)](-->)?([\\s\\S]*?)(<!--)[(][*]end_spec_files[)](-->)', 'g') );
+
+      // Replace the template content with the parsed content
+      // and return the finished product.
+      fin = grunt.file.read(options.template)
+                              .replace(/{{( test_files )}}/g, testFiles)
+                              .replace(/{{( spec_files )}}/g, specFiles);
+
+
+      // Delete any previously existing destination file.
+      if ( grunt.file.exists(file.dest) ) {
+        grunt.log.warn('Previous master test file deleted.');
+        grunt.file.delete(file.dest);
+      }
+
+      // Write to the destination.
       grunt.file.write(file.dest, fin);
 
       // Print a success message.
-      grunt.log.writeln('Template "' + file.dest + '" updated.');
+      grunt.log.ok('Master test file created at ' + file.dest + '.');
     });
   });
 };

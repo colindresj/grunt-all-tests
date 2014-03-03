@@ -1,4 +1,49 @@
-<!--(*begin_spec_files)-->
-    <script src="fix2.specfile.js"></script>
-    <script src="fix2.specfile.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Example Mocha Test</title>
+    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8" />
+    <script src="../js/vendors/jquery/jquery.min.js"></script>
+    <script src="../js/vendors/modernizr/modernizr.js"></script>
+    <script src="js/sinon-1.8.2.js"></script>
+    <script src="../js/core.js"></script>
+</head>
+<body>
+    <!-- Required for browser reporter -->
+    <div id="mocha"></div>
+
+    <!-- mocha -->
+    <script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        // This will be overridden by mocha-helper if you run with grunt
+        mocha.setup('bdd');
+    </script>
+
+    <!-- Include your assertion lib of choice -->
+    <script src="js/chai.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        // Setup chai
+        var expect = chai.expect;
+    </script>
+
+    <!--(*begin_test_files)-->
+      <script src="fix2.test.js"></script>
+      <script src="fix2.test.js"></script>
+    <!--(*end_test_files)-->
+
+    <!--(*begin_spec_files)-->
+      <script src="fix2.specfile.js"></script>
+      <script src="fix2.specfile.js"></script>
     <!--(*end_spec_files)-->
+
+    <!-- run mocha -->
+    <script type="text/javascript" charset="utf-8">
+        if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+            mocha
+                .globals(['FB']) // acceptable globals
+                .run();
+        }
+    </script>
+</body>
+</html>
