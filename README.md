@@ -88,13 +88,13 @@ grunt.initConfig({
   all_tests: {
     test: {
       options: {
-        template: 'test/templates/template.html',
-        clean: false
+        template: 'spec/template/template.html',
+        clean: true
       },
       files: [
         {
-          src: ['test/fixtures/fixture*.html', 'spec/fixtures/another.html'],
-          dest: 'tmp/all.html',
+          src: ['spec/test1-runner.html', spec/test2-runner.html],
+          dest: 'dist/all.html',
           nonull: true
         }
       ],
