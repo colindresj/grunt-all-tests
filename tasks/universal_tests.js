@@ -15,7 +15,8 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       template: 'src/test/template.html',
-      separator: '\n'
+      separator: '',
+      stripComments: true
     });
 
     // Return the parsed content joined together as
@@ -51,7 +52,7 @@ module.exports = function(grunt) {
       // Replace the template content with the parsed content
       // and return the finished product.
       fin = grunt.file.read(options.template)
-                              .replace(/{{( fixtures )}}/g, fixtureContent)
+                              .replace( /{{( fixtures )}}/g, fixtureContent)
                               .replace(/{{( test_files )}}/g, testContent)
                               .replace(/{{( spec_files )}}/g, specContent);
 
@@ -60,6 +61,15 @@ module.exports = function(grunt) {
       if ( grunt.file.exists(file.dest) ) {
         grunt.log.warn('Previous master test file deleted.');
         grunt.file.delete(file.dest);
+      }
+
+      if (options.stripComments) {
+        fin = fin.replace(/<!--[(][*]begin_fixtures[)](-->)/g, '')
+                 .replace(/<!--[(][*]end_fixtures[)](-->)/g, '')
+                 .replace(/<!--[(][*]begin_test_files[)](-->)/g, '')
+                 .replace(/<!--[(][*]end_test_files[)](-->)/g, '')
+                 .replace(/<!--[(][*]begin_spec_files[)](-->)/g, '')
+                 .replace(/<!--[(][*]end_spec_files[)](-->)/g, '');
       }
 
       // Write to the destination.
