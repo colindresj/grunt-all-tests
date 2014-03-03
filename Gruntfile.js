@@ -35,11 +35,15 @@ module.exports = function (grunt) {
     universal_tests: {
       test: {
         options: {
-          template: 'test/fixtures/template.html'
+          template: 'test/fixtures/template.html',
         },
-        files: {
-          'tmp/universal.html': ['test/fixtures/fixture*.html']
-        }
+        files: [
+          {
+            src: ['test/fixtures/fixture*.html', 'hero.html'],
+            dest: 'tmp/universal.html',
+            nonull: true
+          }
+        ],
       }
     },
 

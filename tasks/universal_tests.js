@@ -16,7 +16,8 @@ module.exports = function(grunt) {
     var options = this.options({
       template: 'src/test/template.html',
       separator: '',
-      stripComments: true
+      stripComments: true,
+      selfClean: true
     });
 
     // Return the parsed content joined together as
@@ -28,7 +29,7 @@ module.exports = function(grunt) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
+          return '<!--*** File ' + filepath + ' missing ***-->';
         } else {
           html = grunt.file.read(filepath);
           if (html) {
@@ -58,7 +59,7 @@ module.exports = function(grunt) {
 
 
       // Delete any previously existing destination file.
-      if ( grunt.file.exists(file.dest) ) {
+      if ( grunt.file.exists(file.dest) && options.selfClean ) {
         grunt.log.warn('Previous master test file deleted.');
         grunt.file.delete(file.dest);
       }
