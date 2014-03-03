@@ -1,5 +1,5 @@
 /*
- * grunt-universal-tests
+ * grunt-all-tests
  *
  *
  * Copyright (c) 2014 Jorge Colindres
@@ -32,7 +32,7 @@ module.exports = function (grunt) {
     },
 
     // Configuration to be run (and then tested).
-    universal_tests: {
+    all_tests: {
       test: {
         options: {
           template: 'test/fixtures/template.html',
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
         files: [
           {
             src: ['test/fixtures/fixture*.html'],
-            dest: 'tmp/universal.html',
+            dest: 'tmp/all.html',
             nonull: true
           }
         ],
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'universal_tests', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'all_tests', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

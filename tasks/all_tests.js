@@ -1,5 +1,5 @@
 /*
- * grunt-universal-tests
+ * grunt-all-tests
  *
  *
  * Copyright (c) 2014 Jorge Colindres
@@ -10,7 +10,7 @@
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('universal_tests', 'Combine your tests into one.', function() {
+  grunt.registerMultiTask('all_tests', 'Combine your tests into one.', function() {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({

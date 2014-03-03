@@ -1,6 +1,6 @@
-# grunt-universal-tests
+# grunt-all-tests
 
-> Combine your tests into one.
+> Combine your test runners into one.
 
 ## Getting Started
 This plugin requires Grunt.
@@ -8,27 +8,30 @@ This plugin requires Grunt.
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-universal-tests --save-dev
+npm install grunt-all-tests --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-universal-tests');
+grunt.loadNpmTasks('grunt-all-tests');
 ```
 
-## The "universal_tests" task
+## The all_tests task
+The task joins seperate test runner html files into a single file.
+
+Run this task with the `grunt all_tests` command.
 
 ### Overview
-In your project's Gruntfile, add a section named `universal_tests` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `all_tests` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  universal_tests: {
+  all_tests: {
     options: {
       // Task-specific options go here.
     },
-    your_target: {
+    target_group: {
       // Target-specific file lists and/or options go here.
     },
   },
@@ -37,56 +40,71 @@ grunt.initConfig({
 
 ### Options
 
+#### options.template
+Type: `String`
+Default value: `'src/test/template.html'`
+
+The path to the template file that is used to create your destination file.
+
 #### options.separator
 Type: `String`
 Default value: `',  '`
 
 A string value that is used to do something with whatever.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.stripComments
+Type: `Boolean`
+Default value: `true`
 
-A string value that is used to do something else with whatever else.
+Strips the comments used to seperate groups from the destination file.
 
-### Usage Examples
+#### options.selfClean
+Type: `Boolean`
+Default value: `true`
+
+Deletes the destination file after recompiling the destination template, but before writing the file. Although this option is available, it is suggested to to use [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean).
+
+### Usage Example
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, all the test files in the test/fixtures directory that are prefixed with the word 'fixture' will be joined together and outputed to dist/all.html by way of the template located at the default path.
 
 ```js
 grunt.initConfig({
-  universal_tests: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+  all_tests: {
+    test: {
+      files: {
+        'dist/all.html': ['test/fixtures/fixture*.html'],
+      }
+    }
+  }
+});
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
 ```js
 grunt.initConfig({
-  universal_tests: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+  all_tests: {
+    test: {
+      options: {
+        template: 'test/templates/template.html',
+        clean: false
+      },
+      files: [
+        {
+          src: ['test/fixtures/fixture*.html', 'spec/fixtures/another.html'],
+          dest: 'tmp/all.html',
+          nonull: true
+        }
+      ],
+    }
+  }
+});
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
 ## Release History
-_(Nothing yet)_
+* 2014-03-03   v0.1.0   Initial release.
 
 ## License
 Copyright (c) 2014 Jorge Colindres. Licensed under the MIT license.

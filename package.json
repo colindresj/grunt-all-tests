@@ -1,7 +1,7 @@
 {
-  "name": "grunt-universal-tests",
+  "name": "grunt-all-tests",
   "version": "0.0.1",
-  "description": "Combine your tests into one.",
+  "description": "Combine your test runners into one.",
   "repository": "",
   "author": {
     "name": "Jorge Colindres",

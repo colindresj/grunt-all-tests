@@ -22,7 +22,7 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports.universal_tests = {
+exports.all_tests = {
   setUp: function(done){
     // setup here if necessary
     done();
@@ -30,7 +30,7 @@ exports.universal_tests = {
   write: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/universal.html');
+    var actual = grunt.file.read('tmp/all.html');
 
     test.ok(actual, 'should write to the destination.');
 
