@@ -18,9 +18,22 @@ grunt.loadNpmTasks('grunt-all-tests');
 ```
 
 ### File Setup
-In order to join your test runners together, you'll have to wrap certain parts of your files in special comment tags.
+In order to join your test runners together, you'll have to first setup a test runner template. This file should include all the stylesheets and scripts required by your test suite, as well as file placeholders using the Mustache templating syntax.
 
-Wrap your test files using the `<!--*(begin_test_files)-->` and `<--*(end_test_files)-->` comments, spec files using the `<!--*(begin_spec_files)-->` and `<!--*(end_spec_files)-->` comments, and fixtures using the `<!--*(begin_fixtures)-->` and `<!--*(end_fixtures)-->` comments.
+```html
+  <!-- Include any fixtures -->
+  {{ fixtures }}
+
+  <!-- Include any test files (what you actually want to test) -->
+  {{ test_files }}
+
+  <!-- Include any spec files -->
+  {{ spec_files }}
+```
+
+In addition to creating your template, you'll need to wrap the corresponding parts for each of your individual test runners in special comment tags.
+
+Wrap your test files using the `<!--(*begin_test_files)-->` and `<--(*end_test_files)-->` comments, spec files using the `<!--(*begin_spec_files)-->` and `<!--(*end_spec_files)-->` comments, and fixtures using the `<!--(*begin_fixtures)-->` and `<!--(*end_fixtures)-->` comments.
 
 #### Usage Example
 ```html
@@ -43,6 +56,8 @@ Wrap your test files using the `<!--*(begin_test_files)-->` and `<--*(end_test_f
     <script src="specfile.js"></script>
   <!--(*end_spec_files)-->
 ```
+
+An example template and individual runner is available in the [examples directory](https://github.com/corporadobob/grunt-all-tests/tree/master/examples).
 
 ## The all_tests task
 The task joins seperate test runner html files into a single file.
