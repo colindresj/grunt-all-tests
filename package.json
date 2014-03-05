@@ -1,6 +1,6 @@
 {
   "name": "grunt-all-tests",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Combine your test runners into one.",
   "homepage": "https://github.com/corporadobob/grunt-all-tests",
   "repository": {
