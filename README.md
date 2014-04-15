@@ -57,7 +57,7 @@ Wrap your test files using the `<!--(*begin_test_files)-->` and `<--(*end_test_f
   <!--(*end_spec_files)-->
 ```
 
-An example template and individual runner is available in the [examples directory](https://github.com/corporadobob/grunt-all-tests/tree/master/examples).
+An example template and individual runner is available in the [examples directory](https://github.com/colindresj/grunt-all-tests/tree/master/examples).
 
 ## The all_tests task
 The task joins seperate test runner html files into a single file.

@@ -2,10 +2,10 @@
   "name": "grunt-all-tests",
   "version": "0.1.1",
   "description": "Combine your test runners into one.",
-  "homepage": "https://github.com/corporadobob/grunt-all-tests",
+  "homepage": "https://github.com/colindresj/grunt-all-tests",
   "repository": {
     "type": "git",
-    "url": "git://github.com/corporadobob/grunt-all-tests.git"
+    "url": "git://github.com/colindresj/grunt-all-tests.git"
   },
   "author": {
     "name": "Jorge Colindres",
